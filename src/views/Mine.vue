@@ -1,0 +1,102 @@
+<template>
+    <div>
+        <div class="login">
+            <div class="login-img" @click="LoginClick">
+                <img v-show="!bool" src="../assets/image/login.png">
+                <img v-show="bool" src="../assets/image/login2.png">
+            </div>
+            <span @click="LoginClick">{{title}}</span>
+        </div>
+        <div class="login-list">
+            <ul>
+                <li><span class="iconfont ">&#xe611;</span> 收藏</li>
+                <li><span class="iconfont">&#xe8ad;</span>播放记录</li>
+                <li><span class="iconfont">&#xe62a;</span>客服</li>
+                <li><span class="iconfont">&#xe61d;</span>关于我们</li>
+            </ul>
+        </div>
+
+    </div>
+</template>
+
+<script>
+    export default {
+        name: 'Mine',
+        data() {
+            return {
+                title: "登陆/注册",
+                imgUrl: "https://static.wanplus.com/2019/1/7/154683014500045.jpg",
+                bool: true
+            }
+        },
+
+        created() {
+            this.LoginClick()
+        },
+        methods: {
+            LoginClick() {
+                if (localStorage.getItem("successful")) {
+                    this.bool = true
+                    this.title = localStorage.getItem("RegisterName")
+                    localStorage.setItem("用户头像", this.imgUrl)
+                } else {
+                    this.$router.push({
+                        path: "/login",
+                    });
+                }
+            }
+        },
+    };
+</script>
+
+<style lang="less" scoped>
+    .login {
+        width: 100%;
+        height: 300px;
+        line-height: 300px;
+        display: flex;
+        justify-content: space-around;
+        background: #f6f6f6;
+
+        span {
+            position: absolute;
+            top: 30px;
+            font-size: 18px;
+        }
+
+        .login-img {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 48px;
+            background: #ffffff;
+            border-radius: 50%;
+            overflow: hidden;
+
+            img {
+                position: absolute;
+                background-size: cover;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+    .login-list {
+        margin-top: 30px;
+
+        ul li {
+            display: block;
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            border-bottom: 1px solid #e3e3e3;
+            padding-left: 18px;
+
+            span {
+                margin-right: 8px;
+            }
+        }
+
+    }
+</style>
