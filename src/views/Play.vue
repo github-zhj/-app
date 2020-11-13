@@ -11,14 +11,14 @@
                 <span class="video-introduce">{{queryData.VideoDescriptionEditor}}</span>
             </div>
             <div class="video-icon">
-                <span @click="isLiked" v-if="liked" class="like"><img src="../../public/img/like2.png"></span>
-                <span @click="isLiked" v-if="!liked" class="like"><img src="../../public/img/like1.png"></span>
+                <span @click="liked=!liked" v-if="liked" class="like"><img src="../../public/img/like2.png"></span>
+                <span @click="liked=!liked" v-if="!liked" class="like"><img src="../../public/img/like1.png"></span>
                 <i>{{queryData.VideoCollectionCount}}</i>
 
                 <div class="video-favorite">
-                    <span @click="favorite=!favorite" v-if="!favorite" class="favorite"><img
+                    <span @click="isFavorite" v-if="!favorite" class="favorite"><img
                             src="../../public/img/favorite2.png"></span>
-                    <span @click="favorite=!favorite" v-if="favorite" class="favorite"><img
+                    <span @click="isFavorite" v-if="favorite" class="favorite"><img
                             src="../../public/img/favorite1.png"></span>
                 </div>
 
@@ -60,6 +60,7 @@
                     VideoCollectionCount: '',
                     VideoDuration: '',
                     VideoImg: '',
+                    BGImg:'',
                     VideoUrl: '',
                     VideoDescriptionEditor: '',
                     VideoCategory: '',
@@ -107,7 +108,8 @@
             this.queryData.VideoDescription = this.$route.query.description
             this.queryData.VideoCollectionCount = this.$route.query.collectionCount
             this.queryData.VideoDuration = this.$route.query.duration
-            this.queryData.VideoImg = this.$route.query.img
+            this.queryData.VideoImg = this.$route.query.Detailimg
+            this.queryData.BGImg = this.$route.query.Blurredimg
             this.queryData.VideoUrl = this.$route.query.url
             this.queryData.VideoDescriptionEditor = this.$route.query.descriptionEditor
             this.queryData.VideoCategory = this.$route.query.category
@@ -118,7 +120,7 @@
             let favorite = JSON.parse(localStorage.getItem('favorite'))
             for (let i = 0; i < favorite.length; i++) {
                 if (this.queryData.VideoUrl === favorite[i].VideoUrl) {
-                    this.liked = true
+                    this.favorite = true
                 }
             }
         },
@@ -135,9 +137,9 @@
                 }
                 this.goodBool = !this.goodBool
             },
-            isLiked() {
-                this.liked = !this.liked
-                if (this.liked) {
+            isFavorite() {
+                this.favorite = !this.favorite
+                if (this.favorite) {
                     for (let i = 0; i < this.save.length; i++) {
                         if (this.save[i].VideoUrl == this.queryData.VideoUrl) {
                             this.save.splice(i, 1)
@@ -175,7 +177,7 @@
     * {
         margin: 0;
         padding: 0;
-        color: #000000;
+        color: #ffffff;
         font-weight: normal;
     }
 
@@ -216,7 +218,8 @@
 
             .video-introduce {
                 display: inline-block;
-                font-size: 13px;
+                font-weight: lighter;
+                font-size: 12px;
                 margin-top: 10px;
             }
         }
@@ -307,6 +310,7 @@
         }
 
         .video-title {
+            font-weight: bolder;
             padding-left: 8px;
 
             h2 {

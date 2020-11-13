@@ -65,6 +65,7 @@
         methods: {
             onSubmit(values) {
                 console.log('submit', values);
+                localStorage
             },
             toggleRegsiterPasswordType() {
                 this.isRegisterPassword = !this.isRegisterPassword;

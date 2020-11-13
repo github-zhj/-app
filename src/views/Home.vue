@@ -9,7 +9,7 @@
             <h2>每日开眼精选</h2>
             <div class="wrapper" v-for="(item,index) in resData" :key="index">
                 <div class="home-img"
-                    @click="goPlay(item.tags,item.author.icon,item.author.name,item.author.description,item.consumption.collectionCount,item.duration,item.cover.detail,item.playUrl,item.descriptionEditor,item.category,item.title)">
+                    @click="goPlay(item.tags,item.author.icon,item.author.name,item.author.description,item.consumption.collectionCount,item.duration,item.cover.detail,item.cover.blurred,item.playUrl,item.descriptionEditor,item.category,item.title)">
                     <img :src="item.cover.detail" v-lazy="item.cover.detail">
                     <i class="home-time">{{(item.duration/60).toFixed(2).replace('.',":")}}</i>
                 </div>
@@ -64,7 +64,8 @@
                 })
             },
 
-            goPlay(tags, icon, name, description, collectionCount, duration, img, url, descriptionEditor, category,
+            goPlay(tags, icon, name, description, collectionCount, duration, Detailimg, Blurredimg, url,
+                descriptionEditor, category,
                 title) {
 
                 this.$router.push({
@@ -75,7 +76,8 @@
                         description,
                         collectionCount,
                         duration,
-                        img,
+                        Detailimg,
+                        Blurredimg,
                         url,
                         descriptionEditor,
                         category,
